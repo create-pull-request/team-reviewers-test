@@ -15,4 +15,4 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v2
         with:
-          team-reviewers: developers
+          team-reviewers: write-access
