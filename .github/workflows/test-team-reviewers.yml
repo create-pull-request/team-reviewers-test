@@ -1,19 +1,35 @@
 name: test-team-reviewers
-on:
-  push:
-    branches:
-      - master
+on: workflow_dispatch
+
 jobs:
-  test:
+  test1:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Create report file
         run: date +%s > report.txt
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v4
         with:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          branch: test1
+          title: test1
           team-reviewers: developers
+
+  test2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Create report file
+        run: date +%s > report.txt
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          branch: test2
+          title: test2
+          team-reviewers: secret-team
