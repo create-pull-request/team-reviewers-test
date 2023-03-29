@@ -33,3 +33,24 @@ jobs:
           branch: test2
           title: test2
           team-reviewers: secret-team
+
+  test3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Create report file
+        run: date +%s > report.txt
+
+      - name: Commit report
+        run: |
+          git config --global user.name 'Peter Evans'
+          git config --global user.email 'peter-evans@users.noreply.github.com'
+          git checkout -b test3
+          git commit -am "Automated report"
+          git push
+
+      - name: Create Pull Request
+        run: gh pr create -B master -H test3 --title 'test3' --body 'test3' --reviewer 'secret-team'
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
