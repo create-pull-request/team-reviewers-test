@@ -48,7 +48,7 @@ jobs:
           git config --global user.email 'peter-evans@users.noreply.github.com'
           git checkout -b test3
           git commit -am "Automated report"
-          git push
+          git push --set-upstream origin test3
 
       - name: Create Pull Request
         run: gh pr create -B master -H test3 --title 'test3' --body 'test3' --reviewer 'secret-team'
