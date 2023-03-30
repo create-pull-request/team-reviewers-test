@@ -11,46 +11,48 @@ jobs:
         run: date +%s > report.txt
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@graphql
         with:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           branch: test1
           title: test1
-          team-reviewers: developers
+          team-reviewers: |
+            create-pull-request/developers
+            create-pull-request/qa-team
 
-  test2:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+#   test2:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
 
-      - name: Create report file
-        run: date +%s > report.txt
+#       - name: Create report file
+#         run: date +%s > report.txt
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4
-        with:
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          branch: test2
-          title: test2
-          team-reviewers: secret-team
+#       - name: Create Pull Request
+#         uses: peter-evans/create-pull-request@v4
+#         with:
+#           token: ${{ secrets.REPO_ACCESS_TOKEN }}
+#           branch: test2
+#           title: test2
+#           team-reviewers: secret-team
 
-  test3:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+#   test3:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
 
-      - name: Create report file
-        run: date +%s > report.txt
+#       - name: Create report file
+#         run: date +%s > report.txt
 
-      - name: Commit report
-        run: |
-          git config --global user.name 'Peter Evans'
-          git config --global user.email 'peter-evans@users.noreply.github.com'
-          git checkout -b test3
-          git commit -am "Automated report"
-          git push --set-upstream origin test3
+#       - name: Commit report
+#         run: |
+#           git config --global user.name 'Peter Evans'
+#           git config --global user.email 'peter-evans@users.noreply.github.com'
+#           git checkout -b test3
+#           git commit -am "Automated report"
+#           git push --set-upstream origin test3
 
-      - name: Create Pull Request
-        run: gh pr create -B master -H test3 --title 'test3' --body 'test3' --reviewer 'secret-team'
-        env:
-          GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+#       - name: Create Pull Request
+#         run: gh pr create -B master -H test3 --title 'test3' --body 'test3' --reviewer 'secret-team'
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
