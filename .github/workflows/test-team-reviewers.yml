@@ -20,21 +20,41 @@ jobs:
             create-pull-request/developers
             create-pull-request/qa-team
 
-#   test2:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v3
+  test2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
 
-#       - name: Create report file
-#         run: date +%s > report.txt
+      - name: Create report file
+        run: date +%s > report.txt
 
-#       - name: Create Pull Request
-#         uses: peter-evans/create-pull-request@v4
-#         with:
-#           token: ${{ secrets.REPO_ACCESS_TOKEN }}
-#           branch: test2
-#           title: test2
-#           team-reviewers: secret-team
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          branch: test2
+          title: test2
+          team-reviewers: |
+            create-pull-request/developers
+            create-pull-request/qa-team
+
+  test3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Create report file
+        run: date +%s > report.txt
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          branch: test3
+          title: test3
+          team-reviewers: |
+            developers
+            qa-team
 
 #   test3:
 #     runs-on: ubuntu-latest
